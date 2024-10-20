@@ -1,12 +1,12 @@
-import React from "react";
+import { Order } from "@/interfaces/order";
+import OrderSummary from "./OrderSummary";
 
-const DashboardContent: React.FC = () => {
+const DashboardContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
   return (
     <div>
-      <h2 className="text-2xl font-semibold mb-4">Dashboard Overview</h2>
-      <p>Welcome to the Dashboard! Here you can view your overall stats and insights.</p>
+        <OrderSummary orders={orders}/>
     </div>
-  );
-};
+  )
+}
 
 export default DashboardContent;
