@@ -165,15 +165,10 @@ cd Order-management-system
 - **500 Internal Server Error**: Returned for any unhandled server-side exceptions.
 
 ## Screenshots
-![image](https://github.com/user-attachments/assets/d81c18be-5a34-4fd5-bce2-672387d15cb4)
-![image](https://github.com/user-attachments/assets/b79f6b70-1fbd-404b-91fe-49c68b2c19f3)
-![image](https://github.com/user-attachments/assets/91132dc9-6b68-4cea-9d84-293b4fa5efd9)
-![image](https://github.com/user-attachments/assets/d7971381-677b-4015-82d3-ccb8c561ae2d)
-![image](https://github.com/user-attachments/assets/6638806f-e148-4b6b-a4d9-2242d75070e3)
-![image](https://github.com/user-attachments/assets/08adb89c-8c98-43e8-bd2c-e1b1f8e02d85)
-
-
-
-
+![image](https://github.com/user-attachments/assets/84b28527-d4e9-45f7-ad9d-dbaba947cab5)
+![image](https://github.com/user-attachments/assets/e9c6c851-32d7-45ff-87df-e6d858e0c22e)
+![image](https://github.com/user-attachments/assets/56cf352d-3128-47f7-bb72-ee134fb655f4)
+![WhatsApp Image 2024-10-21 at 03 43 00_e8fc43d5](https://github.com/user-attachments/assets/3b3ea3ce-f75d-4cd3-a34b-e3c92dbf98b0)
+![WhatsApp Image 2024-10-21 at 03 44 34_c4f86940](https://github.com/user-attachments/assets/a74beb1c-8491-4b8a-a239-7f1d738fee3a)
 
 
