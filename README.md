@@ -8,6 +8,7 @@
   - [Frontend Setup (Next.js)](#frontend-setup-nextjs)
 - [API Endpoints](#api-endpoints)
 - [Environment Variables](#environment-variables)
+- [Screenshots](#screenshots)
 
 ## Features
 - **Order Management**: Create, update status, view, and delete orders.
@@ -164,5 +165,15 @@ cd Order-management-system
 - **500 Internal Server Error**: Returned for any unhandled server-side exceptions.
 
 ## Screenshots
+![image](https://github.com/user-attachments/assets/d81c18be-5a34-4fd5-bce2-672387d15cb4)
+![image](https://github.com/user-attachments/assets/b79f6b70-1fbd-404b-91fe-49c68b2c19f3)
+![image](https://github.com/user-attachments/assets/91132dc9-6b68-4cea-9d84-293b4fa5efd9)
+![image](https://github.com/user-attachments/assets/d7971381-677b-4015-82d3-ccb8c561ae2d)
+![image](https://github.com/user-attachments/assets/6638806f-e148-4b6b-a4d9-2242d75070e3)
+![image](https://github.com/user-attachments/assets/08adb89c-8c98-43e8-bd2c-e1b1f8e02d85)
+
+
+
+
 
 
