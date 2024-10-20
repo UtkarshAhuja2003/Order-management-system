@@ -168,7 +168,8 @@ cd Order-management-system
 ![image](https://github.com/user-attachments/assets/84b28527-d4e9-45f7-ad9d-dbaba947cab5)
 ![image](https://github.com/user-attachments/assets/e9c6c851-32d7-45ff-87df-e6d858e0c22e)
 ![image](https://github.com/user-attachments/assets/56cf352d-3128-47f7-bb72-ee134fb655f4)
-![WhatsApp Image 2024-10-21 at 03 43 00_e8fc43d5](https://github.com/user-attachments/assets/3b3ea3ce-f75d-4cd3-a34b-e3c92dbf98b0)
-![WhatsApp Image 2024-10-21 at 03 44 34_c4f86940](https://github.com/user-attachments/assets/a74beb1c-8491-4b8a-a239-7f1d738fee3a)
+<img src="https://github.com/user-attachments/assets/3b3ea3ce-f75d-4cd3-a34b-e3c92dbf98b0" alt="Image 1" height="500">
+<img src="https://github.com/user-attachments/assets/a74beb1c-8491-4b8a-a239-7f1d738fee3a" alt="Image 2" height="500">
+
 
 
