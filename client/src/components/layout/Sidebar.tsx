@@ -9,7 +9,7 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ selectedItem, onSelect, isOpen, onClose }) => {
+const Sidebar: React.FC<SidebarProps> = ({ selectedItem, onSelect, isOpen }) => {
   return (
     <div
       className={`${

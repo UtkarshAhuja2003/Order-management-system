@@ -21,7 +21,7 @@ const OrderUpdatePopup = ({ orderId, onClose, onUpdate }: { orderId: string, onC
           setFormState(res.data);
         }
       } catch (error) {
-        showBanner("error", "Failed to load order data");
+        showBanner("error", (error as Error).message || "Failed to fetch order");
       }
     };
     fetchOrder();

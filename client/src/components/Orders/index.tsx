@@ -7,6 +7,7 @@ import OrderUpdatePopup from '@/components/Orders/OrderUpdatePopup';
 import OrderCreatePopup from '@/components/Orders/OrderCreatePopup';
 import { deleteOrder, getOrderById, getAllOrders } from "@/api/order";
 import { useBanner } from "@/hooks/useBanner";
+import Banner from "../common/Banner";
 import { Order } from "@/interfaces/order";
 
 const OrdersContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
@@ -75,6 +76,7 @@ const OrdersContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
       )}
 
       <h2 className="text-2xl font-semibold mb-4 mt-8">Orders Management</h2>
+      {banner.isVisible && banner.type && <Banner message={banner.message} onClose={closeBanner} type={banner.type} />}
       
       <div className="mb-4">
         <button
