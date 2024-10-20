@@ -31,8 +31,8 @@ const OrderUpdatePopup = ({ orderId, onClose, onUpdate }: { orderId: string, onC
     const success = await handleSubmit(true);
     if (success) {
       showBanner("success", "Order updated successfully");
-      onUpdate();  // Trigger the update callback
-      onClose();  // Close the popup after successful update
+      onUpdate();
+      onClose();
     } else {
       showBanner("error", "Failed to update the order");
     }

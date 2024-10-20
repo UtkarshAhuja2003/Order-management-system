@@ -1,40 +1,25 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { useOrderForm } from "@/hooks/orderForm";
 import OrderForm from "@/components/Orders/orderForm";
 import Banner from "@/components/common/Banner";
 import { useBanner } from "@/hooks/useBanner";
-import { getOrderById } from "@/api/order";
 
-const OrderUpdatePopup = ({ orderId, onClose, onUpdate }: { orderId: string, onClose: () => void, onUpdate: () => void }) => {
-  const { formState, setFormState, handleChange, handleSubmit, errors, isSubmitting } = useOrderForm({
+const OrderCreatePopup = ({ onClose, onCreate }: { onClose: () => void, onCreate: () => void }) => {
+  const { formState, handleChange, handleSubmit, errors, isSubmitting } = useOrderForm({
     customer_email: "",
     status: "CONFIRMED",
   });
   const { banner, showBanner, closeBanner } = useBanner();
 
-  useEffect(() => {
-    const fetchOrder = async () => {
-      try {
-        const res = await getOrderById(orderId);
-        if (res.data) {
-          setFormState(res.data);
-        }
-      } catch (error) {
-        showBanner("error", "Failed to load order data");
-      }
-    };
-    fetchOrder();
-  }, [orderId]);
-
   const handleFormSubmit = async () => {
-    const success = await handleSubmit(true);
+    const success = await handleSubmit(false);
     if (success) {
-      showBanner("success", "Order updated successfully");
-      onUpdate();  // Trigger the update callback
-      onClose();  // Close the popup after successful update
+      showBanner("success", "Order created successfully");
+      onCreate(); 
+      onClose(); 
     } else {
-      showBanner("error", "Failed to update the order");
+      showBanner("error", "Failed to create the order");
     }
   };
 
@@ -50,7 +35,7 @@ const OrderUpdatePopup = ({ orderId, onClose, onUpdate }: { orderId: string, onC
           handleSubmit={handleFormSubmit}
           errors={errors}
           isSubmitting={isSubmitting}
-          isEdit={true}
+          isEdit={false}
         />
         <button onClick={onClose} className="mt-4 text-red-600">Close</button>
       </div>
@@ -58,4 +43,4 @@ const OrderUpdatePopup = ({ orderId, onClose, onUpdate }: { orderId: string, onC
   );
 };
 
-export default OrderUpdatePopup;
+export default OrderCreatePopup;
