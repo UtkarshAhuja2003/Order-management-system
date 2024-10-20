@@ -8,6 +8,7 @@
   - [Frontend Setup (Next.js)](#frontend-setup-nextjs)
 - [API Endpoints](#api-endpoints)
 - [Environment Variables](#environment-variables)
+- [Demo Video](#demo-video)
 - [Screenshots](#screenshots)
 
 ## Features
@@ -163,6 +164,11 @@ cd Order-management-system
 - **400 Bad Request**: Returned when there are validation errors in the request payload.
 - **404 Not Found**: Returned when the requested order does not exist.
 - **500 Internal Server Error**: Returned for any unhandled server-side exceptions.
+
+## Demo Video
+[![Watch the demo](https://cdn.loom.com/sessions/thumbnails/8df821af51de4c98bef5d172415e995c-61ff02ec52bc69bb-full-play.gif)](https://www.loom.com/share/8df821af51de4c98bef5d172415e995c?sid=ed6b8c4f-ab1a-4d95-a4e0-21b5f58d6fbf)
+
+
 
 ## Screenshots
 ![image](https://github.com/user-attachments/assets/84b28527-d4e9-45f7-ad9d-dbaba947cab5)
