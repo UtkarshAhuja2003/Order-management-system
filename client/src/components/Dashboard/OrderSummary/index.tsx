@@ -9,7 +9,6 @@ import { StatusBox } from "./Status";
 const OrderSummary: React.FC<{ orders: Order[] }> = ({ orders }) => {
   const [filteredOrders, setFilteredOrders] = useState<Order[]>(orders);
   const [timeframe, setTimeframe] = useState<string>('lastWeek');
-  console.log(filteredOrders);
 
   useEffect(() => {
     filterOrders(timeframe);
