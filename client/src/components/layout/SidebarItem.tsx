@@ -11,8 +11,8 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ item, isSelected, onClick }) 
     <li className="relative flex items-center">
         <button
           onClick={onClick}
-          className={`flex items-center w-[90%] mx-auto py-3 px-5 rounded-md text-darkRed transition-all duration-300 ${
-            isSelected ? "bg-darkRed text-white" : "bg-lightRed text-darkRed"
+          className={`flex items-center w-[90%] mx-auto py-3 px-5 rounded-md text-darkBlue transition-all duration-300 ${
+            isSelected ? "bg-darkBlue text-white" : "bg-lightBlue text-darkBlue"
           }`}
         >
           <item.icon className="mr-3 text-[160%]" />

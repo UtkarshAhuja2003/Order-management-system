@@ -17,7 +17,7 @@ const Dashboard: React.FC = () => {
     <div className="flex min-h-screen">
       <div className="md:hidden fixed top-0 left-0 z-50 p-4">
         <button onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Toggle sidebar">
-          <GiHamburgerMenu className="text-darkRed text-3xl" />
+          <GiHamburgerMenu className="text-darkBlue text-3xl" />
         </button>
       </div>
 
