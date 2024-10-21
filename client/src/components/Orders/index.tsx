@@ -1,28 +1,19 @@
 import React, { useState } from "react";
-import { MdSettings } from "react-icons/md";
-import { BiTrash } from "react-icons/bi";
-import Badge from '@/components/common/Badge';
 import { deleteOrder, getOrderById, getAllOrders } from "@/api/order";
 import { useBanner } from "@/hooks/useBanner";
 import Banner from "../common/Banner";
 import { Order } from "@/interfaces/order";
-import { formatDate } from "@/utils/date";
-import { OrderStatus } from "@/utils/constants";
+import OrderRow from "./OrderRow";
 import OrderPopup from "./OrderPopup";
 
 const OrdersContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
-  const [showActions, setShowActions] = useState<number | null>(null);
   const { banner, showBanner, closeBanner } = useBanner();
   const [popupOrderId, setPopupOrderId] = useState<string | null>(null);
   const [filteredOrders, setFilteredOrders] = useState<Order[]>(orders);
   const [isCreatePopupVisible, setIsCreatePopupVisible] = useState<boolean>(false);
 
-  const toggleActions = (index: number) => {
-    setShowActions(showActions === index ? null : index);
-  };
-
-  const handleDelete = async (id: string) => {
+  const handleDelete: (id: string) => Promise<void> = async (id: string) => {
     await deleteOrder(id);
     setFilteredOrders(filteredOrders.filter(order => order.id !== id));
     showBanner('success', 'Order deleted successfully');
@@ -32,13 +23,13 @@ const OrdersContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
     const updatedOrder = await getOrderById(id);
     setFilteredOrders(
       filteredOrders.map(order =>
-        order.id === id && updatedOrder.data ? { ...order, status: updatedOrder.data.status } : order
+        order.id === id && updatedOrder.data ? { ...order, status: updatedOrder.data.status, updated_at: updatedOrder.data.updated_at } : order
       )
     );
   };
 
   const handleCreate = async () => {
-    const newOrders = await getAllOrders(); 
+    const newOrders = await getAllOrders();
     if (newOrders.data) {
       setFilteredOrders(newOrders.data);
     }
@@ -55,18 +46,18 @@ const OrdersContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
       )}
 
       {isCreatePopupVisible && (
-         <OrderPopup
-            onClose={() => setIsCreatePopupVisible(false)}
-            onSuccess={() => handleCreate()}
-          />
+        <OrderPopup
+          onClose={() => setIsCreatePopupVisible(false)}
+          onSuccess={() => handleCreate()}
+        />
       )}
 
       <h2 className="text-2xl font-semibold mb-4 mt-8">Orders Management</h2>
       {banner.isVisible && banner.type && <Banner message={banner.message} onClose={closeBanner} type={banner.type} />}
-      
+
       <div className="mb-4">
         <button
-          onClick={() => setIsCreatePopupVisible(true)} 
+          onClick={() => setIsCreatePopupVisible(true)}
           className="bg-blue-500 text-white px-4 py-2 rounded-md"
         >
           Create New Order
@@ -85,42 +76,14 @@ const OrdersContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
         </thead>
         <tbody>
           {filteredOrders.map((order, index) => (
-            <tr
+            <OrderRow
               key={order.id}
-              className={`border-b border-gray-200 ${selectedRow === index ? "bg-[#DCD6F7]" : ""}`}
-              onClick={() => setSelectedRow(index)}
-            >
-              <td className="p-4">{order.id}</td>
-              <td className="p-4">{order.customer_email || "N/A"}</td>
-              <td className="p-4"><Badge status={order.status || OrderStatus.CONFIRMED} /></td>
-              <td className="p-4">{formatDate(order.updated_at)}</td>
-              <td className="p-4">
-                <div className="relative inline-block text-left">
-                  <button onClick={() => toggleActions(index)}>
-                    <MdSettings className="text-2xl text-gray-500 hover:text-gray-700" />
-                  </button>
-                  {showActions === index && (
-                    <div className="absolute right-0 z-10 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <div className="py-1" role="none">
-                        <button
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
-                          onClick={() => order.id && setPopupOrderId(order.id)} 
-                        >
-                          Update
-                        </button>
-                        <button
-                          className="block bg-red-200 px-4 py-2 text-sm text-gray-700 hover:bg-red-400 w-full text-left"
-                          onClick={() => order.id && handleDelete(order.id)}
-                        >
-                          <BiTrash className="inline-block mr-1" />
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </td>
-            </tr>
+              order={order}
+              onUpdate={() => order.id && setPopupOrderId(order.id)}
+              onDelete={() => order.id && handleDelete(order.id)}
+              isSelected={selectedRow === index}
+              onSelect={() => setSelectedRow(index)}
+            />
           ))}
         </tbody>
       </table>
