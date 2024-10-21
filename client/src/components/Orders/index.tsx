@@ -1,4 +1,3 @@
-// components/Orders/OrdersContent.tsx
 import React, { useState } from "react";
 import { MdSettings } from "react-icons/md";
 import { BiTrash } from "react-icons/bi";
@@ -9,6 +8,8 @@ import { deleteOrder, getOrderById, getAllOrders } from "@/api/order";
 import { useBanner } from "@/hooks/useBanner";
 import Banner from "../common/Banner";
 import { Order } from "@/interfaces/order";
+import { formatDate } from "@/utils/date";
+import { OrderStatus } from "@/utils/constants";
 
 const OrdersContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
@@ -20,20 +21,6 @@ const OrdersContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
 
   const toggleActions = (index: number) => {
     setShowActions(showActions === index ? null : index);
-  };
-
-  const formatDate = (dateString: string | undefined) => {
-    if (!dateString) return "N/A";
-    const now = new Date();
-    const date = new Date(dateString);
-    const diff = Math.abs(now.getTime() - date.getTime());
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
-    if (days > 0) return `${days} day${days > 1 ? "s" : ""} ago`;
-    if (hours > 0) return `${hours} hour${hours > 1 ? "s" : ""} ago`;
-    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
   };
 
   const handleDelete = async (id: string) => {
@@ -106,7 +93,7 @@ const OrdersContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
             >
               <td className="p-4">{order.id}</td>
               <td className="p-4">{order.customer_email || "N/A"}</td>
-              <td className="p-4"><Badge status={order.status || 'CONFIRMED'} /></td>
+              <td className="p-4"><Badge status={order.status || OrderStatus.CONFIRMED} /></td>
               <td className="p-4">{formatDate(order.updated_at)}</td>
               <td className="p-4">
                 <div className="relative inline-block text-left">

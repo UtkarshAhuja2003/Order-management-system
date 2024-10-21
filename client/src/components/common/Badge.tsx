@@ -1,22 +1,19 @@
 import React from 'react';
+import { OrderStatus } from '@/utils/constants';
+import { orderStatusConfig } from '@/utils/constants';
 
 interface BadgeProps {
-  status: 'CONFIRMED' | 'REJECTED' | 'PREPARING' | 'READY';
+  status: OrderStatus;
 }
 
 const Badge: React.FC<BadgeProps> = ({ status }) => {
-  const statusClasses = {
-    CONFIRMED: 'bg-green-200 text-green-800',
-    REJECTED: 'bg-red-200 text-red-800',
-    PREPARING: 'bg-yellow-200 text-yellow-800',
-    READY: 'bg-blue-200 text-blue-800',
-  };
+  const statusConfig = orderStatusConfig[status];
 
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium ${statusClasses[status] || 'bg-gray-200 text-gray-800'}`}
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium ${statusConfig?.className || 'bg-gray-200 text-gray-800'}`}
     >
-      {status}
+      {statusConfig?.label || status}
     </span>
   );
 };

@@ -6,10 +6,8 @@ const validateEmail = (email: string): boolean => {
     return emailRegex.test(email);
 };
 
-const ORDER_STATUS_CHOICES: OrderStatus[] = ['CONFIRMED', 'REJECTED', 'PREPARING', 'READY'];
-
 const validateOrderStatus = (status: string): boolean => {
-    return ORDER_STATUS_CHOICES.includes(status as OrderStatus);
+    return OrderStatus[status as keyof typeof OrderStatus] !== undefined;
 };
 
 export const validateOrder = (order: Partial<Order>): { isValid: boolean, errors: string[] } => {
@@ -20,7 +18,7 @@ export const validateOrder = (order: Partial<Order>): { isValid: boolean, errors
     }
 
     if (!order.status || !validateOrderStatus(order.status)) {
-        errors.push(`Invalid order status: ${order.status}. Valid options are: ${ORDER_STATUS_CHOICES.join(', ')}.`);
+        errors.push(`Invalid order status: ${order.status}. Valid options are: ${Object.keys(OrderStatus).join(', ')}.`);
     }
     return {
         isValid: errors.length === 0,

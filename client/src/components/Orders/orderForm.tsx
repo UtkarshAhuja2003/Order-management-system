@@ -4,7 +4,7 @@ import InputField from '@/components/common/InputField';
 import Button from '@/components/common/Button';
 import SelectField from '@/components/common/SelectField';
 import { OrderFormProps } from '@/interfaces/order';
-import { ORDER_STATUS_CHOICES } from '@/utils/constants';
+import { OrderStatus } from '@/utils/constants';
 
 const OrderForm: React.FC<OrderFormProps> = ({ formState, handleChange, handleSubmit, errors, isSubmitting, isEdit }) => (
   <div className="container mx-auto p-6 bg-white rounded-lg shadow-md">
@@ -30,7 +30,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ formState, handleChange, handleSu
         name="status" 
         value={formState.status} 
         onChange={handleChange} 
-        options={[...ORDER_STATUS_CHOICES]}
+        options={[...Object.values(OrderStatus)]}
       />
       <Button 
         label={isEdit ? 'Update Order Status' : 'Create Order'} 

@@ -4,11 +4,12 @@ import { useOrderForm } from "@/hooks/orderForm";
 import OrderForm from "@/components/Orders/orderForm";
 import Banner from "@/components/common/Banner";
 import { useBanner } from "@/hooks/useBanner";
+import { OrderStatus } from "@/utils/constants";
 
 const OrderCreatePopup = ({ onClose, onCreate }: { onClose: () => void, onCreate: () => void }) => {
   const { formState, handleChange, handleSubmit, errors, isSubmitting } = useOrderForm({
     customer_email: "",
-    status: "CONFIRMED",
+    status: OrderStatus.CONFIRMED,
   });
   const { banner, showBanner, closeBanner } = useBanner();
 

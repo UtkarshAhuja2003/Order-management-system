@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
 import { Order } from '@/interfaces/order';
-import { validateOrder } from '@/utils/orderValidation';
+import { validateOrder } from '@/utils/validation';
 import { createOrder, updateOrder } from '@/api/order';
 
 export const useOrderForm = (initialState: Order) => {

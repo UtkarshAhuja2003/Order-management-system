@@ -1,6 +1,7 @@
 import React from 'react';
 import { Order } from '@/interfaces/order';
 import Badge from '@/components/common/Badge';
+import { OrderStatus } from '@/utils/constants';
 
 const Updates: React.FC<{ orders: Order[] }> = ({ orders }) => {
   const recentOrders = [...orders]
@@ -20,7 +21,7 @@ const Updates: React.FC<{ orders: Order[] }> = ({ orders }) => {
               <p className="text-sm font-medium text-gray-700">
                 Customer: {order.customer_email || 'N/A'}
               </p>
-              <Badge status={order.status || 'CONFIRMED'} />
+              <Badge status={order.status || OrderStatus.CONFIRMED} />
             </div>
             <div className="mt-2 sm:mt-0">
               <p className="text-sm text-gray-500">
