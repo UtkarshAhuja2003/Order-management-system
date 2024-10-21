@@ -1,13 +1,20 @@
 "use client";
 import React, { useEffect } from "react";
 import { useOrderForm } from "@/hooks/orderForm";
-import OrderForm from "@/components/Orders/orderForm";
+import OrderForm from "@/components/Orders/OrderForm";
 import Banner from "@/components/common/Banner";
 import { useBanner } from "@/hooks/useBanner";
 import { getOrderById } from "@/api/order";
 import { OrderStatus } from "@/utils/constants";
 
-const OrderUpdatePopup = ({ orderId, onClose, onUpdate }: { orderId: string, onClose: () => void, onUpdate: () => void }) => {
+interface OrderPopupProps {
+  orderId?: string;
+  onClose: () => void;
+  onSuccess: () => void;
+}
+
+const OrderPopup: React.FC<OrderPopupProps> = ({ orderId, onClose, onSuccess }) => {
+  const isEdit = !!orderId;
   const { formState, setFormState, handleChange, handleSubmit, errors, isSubmitting } = useOrderForm({
     customer_email: "",
     status: OrderStatus.CONFIRMED,
@@ -15,27 +22,29 @@ const OrderUpdatePopup = ({ orderId, onClose, onUpdate }: { orderId: string, onC
   const { banner, showBanner, closeBanner } = useBanner();
 
   useEffect(() => {
-    const fetchOrder = async () => {
-      try {
-        const res = await getOrderById(orderId);
-        if (res.data) {
-          setFormState(res.data);
+    if (isEdit && orderId) {
+      const fetchOrder = async () => {
+        try {
+          const res = await getOrderById(orderId);
+          if (res.data) {
+            setFormState(res.data);
+          }
+        } catch (error) {
+          showBanner("error", (error as Error).message || "Failed to fetch order");
         }
-      } catch (error) {
-        showBanner("error", (error as Error).message || "Failed to fetch order");
-      }
-    };
-    fetchOrder();
-  }, [orderId]);
+      };
+      fetchOrder();
+    }
+  }, [orderId, isEdit]);
 
   const handleFormSubmit = async () => {
-    const success = await handleSubmit(true);
+    const success = await handleSubmit(isEdit);
     if (success) {
-      showBanner("success", "Order updated successfully");
-      onUpdate();
+      showBanner("success", `Order ${isEdit ? "updated" : "created"} successfully`);
+      onSuccess(); 
       onClose();
     } else {
-      showBanner("error", "Failed to update the order");
+      showBanner("error", `Failed to ${isEdit ? "update" : "create"} the order`);
     }
   };
 
@@ -51,7 +60,7 @@ const OrderUpdatePopup = ({ orderId, onClose, onUpdate }: { orderId: string, onC
           handleSubmit={handleFormSubmit}
           errors={errors}
           isSubmitting={isSubmitting}
-          isEdit={true}
+          isEdit={isEdit}
         />
         <button onClick={onClose} className="mt-4 text-red-600">Close</button>
       </div>
@@ -59,4 +68,4 @@ const OrderUpdatePopup = ({ orderId, onClose, onUpdate }: { orderId: string, onC
   );
 };
 
-export default OrderUpdatePopup;
+export default OrderPopup;

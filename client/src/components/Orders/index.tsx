@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { MdSettings } from "react-icons/md";
 import { BiTrash } from "react-icons/bi";
 import Badge from '@/components/common/Badge';
-import OrderUpdatePopup from '@/components/Orders/OrderUpdatePopup';
-import OrderCreatePopup from '@/components/Orders/OrderCreatePopup';
 import { deleteOrder, getOrderById, getAllOrders } from "@/api/order";
 import { useBanner } from "@/hooks/useBanner";
 import Banner from "../common/Banner";
 import { Order } from "@/interfaces/order";
 import { formatDate } from "@/utils/date";
 import { OrderStatus } from "@/utils/constants";
+import OrderPopup from "./OrderPopup";
 
 const OrdersContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
@@ -48,18 +47,18 @@ const OrdersContent: React.FC<{ orders: Order[] }> = ({ orders }) => {
   return (
     <div className="overflow-x-auto">
       {popupOrderId && (
-        <OrderUpdatePopup
+        <OrderPopup
           orderId={popupOrderId}
-          onClose={() => setPopupOrderId(null)} 
-          onUpdate={() => handleUpdate(popupOrderId)} 
+          onClose={() => setPopupOrderId(null)}
+          onSuccess={() => handleUpdate(popupOrderId)}
         />
       )}
 
       {isCreatePopupVisible && (
-        <OrderCreatePopup
-          onClose={() => setIsCreatePopupVisible(false)} 
-          onCreate={handleCreate} 
-        />
+         <OrderPopup
+            onClose={() => setIsCreatePopupVisible(false)}
+            onSuccess={() => handleCreate()}
+          />
       )}
 
       <h2 className="text-2xl font-semibold mb-4 mt-8">Orders Management</h2>
